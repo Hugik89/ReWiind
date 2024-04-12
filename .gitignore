@@ -1,3 +1,5 @@
 build/
+test/
 .vscode/
 *.o
+*.puml
