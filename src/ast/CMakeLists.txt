@@ -3,6 +3,6 @@ project(ReWiind VERSION 0.1.0 LANGUAGES CXX)
 
 include_directories(..)
 
-set(ASTENGINE astengine.cpp)
+set(ASTENGINE astheader.cpp)
 
 add_library(astEngine SHARED ${ASTENGINE})

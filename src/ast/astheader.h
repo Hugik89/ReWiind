@@ -2,22 +2,17 @@
 
 #include <memory>
 #include <string>
+#include <iterator>
 
-#include "../common/bytebuffer.h"
+#include "../common/header.h"
 
 namespace rewiind {
 
 namespace ast {
 
-class ASTHeader
+class ASTHeader : public common::GenericHeader
 {
 private:
-    const unsigned int headerlen = 0x40;
-    rewiind::common::ByteBuffer headerdata;
-
-public:
-    ASTHeader(rewiind::common::ByteBuffer& bytebuffer);
-
     const std::string getMagic();
     const uint32_t getFileSize();
     const uint16_t getAudioFormat();
@@ -28,13 +23,18 @@ public:
     const uint32_t getLoopStart();
     const uint32_t getLoopEnd();
     const uint32_t getFirstBlockSize();
+
+    const std::string parseAudioFormat();
+
+public:
+    ASTHeader(common::ByteBuffer& bytebuffer);
+
+    void printContents();
 };
 
-class BLCKHeader
+class BLCKHeader : public common::GenericHeader
 {
 private:
-    //rewiind::common::ByteBuffer blockdata;
-
     const std::string getMagic();
     const uint32_t getBlockSize();
 };
