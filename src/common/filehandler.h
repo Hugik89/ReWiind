@@ -18,12 +18,18 @@ class FileHandler
 {
 private :
     std::fstream filestream;
+    bool openmode;
 
 public :
-    void openFile(std::string filename, bool mode);
-    void closeFile();
+    FileHandler();
+    FileHandler(std::string, bool mode);
 
+    ~FileHandler();
+
+    void openFile(std::string filename, bool mode);
     rewiind::common::ByteBuffer readFile(std::size_t len);
+    void moveFileOffset(long offset, bool origin);
+    void closeFile();
 };
 
 }

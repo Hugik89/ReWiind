@@ -28,8 +28,6 @@ public:
     // Copy constructor
     ByteBuffer(ByteBuffer& copy);
 
-    std::vector<char>& getBuffer();
-
     const std::string BytestoString(std::size_t start, std::size_t end);
     const uint8_t BytestoUint8(std::size_t offset);
     const uint16_t BytestoUint16(std::size_t offset);

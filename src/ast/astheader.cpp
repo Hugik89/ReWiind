@@ -7,51 +7,66 @@ ASTHeader::ASTHeader(common::ByteBuffer& bytebuffer)
     this->bytes = std::move(bytebuffer);
 }
 
+ASTHeader::ASTHeader(common::ByteBuffer&& bytebuffer)
+{
+    this->bytes = std::move(bytebuffer);
+}
+
+inline
 const std::string ASTHeader::getMagic()
 {
     return this->bytes.BytestoString(0x00,4);
 }
 
+inline
 const uint32_t ASTHeader::getFileSize()
 {
     return this->bytes.BytestoUint32(0x04);
 }
 
+inline
 const uint16_t ASTHeader::getAudioFormat()
 {
     return this->bytes.BytestoUint16(0x08);
 }
 
+inline
 const uint16_t ASTHeader::getBitDepth()
 {
     return this->bytes.BytestoUint16(0x0a);
 }
 
+inline
 const uint16_t ASTHeader::getChannelCount()
 {
     return this->bytes.BytestoUint16(0x0c);
 }
 
+inline
 const uint32_t ASTHeader::getSampleRate()
 {
     return this->bytes.BytestoUint32(0x10);
 }
 
+inline
 const uint32_t ASTHeader::getSampleCount()
 {
     return this->bytes.BytestoUint32(0x14);
 }
 
+inline
 const uint32_t ASTHeader::getLoopStart()
 {
     return this->bytes.BytestoUint32(0x18);
 }
 
+inline
 const uint32_t ASTHeader::getLoopEnd()
 {
     return this->bytes.BytestoUint32(0x1c);
 }
 
+inline
 const uint32_t ASTHeader::getFirstBlockSize()
 {
     return this->bytes.BytestoUint32(0x20);

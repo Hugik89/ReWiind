@@ -28,6 +28,7 @@ private:
 
 public:
     ASTHeader(common::ByteBuffer& bytebuffer);
+    ASTHeader(common::ByteBuffer&& bytebuffer);
 
     void printContents();
 };

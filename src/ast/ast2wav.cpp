@@ -7,13 +7,9 @@ using namespace rewiind;
 
 int main(int argc, char* argv[])
 {
-    common::FileHandler fh;
+    common::FileHandler fh{argv[1], 1};
 
-    fh.openFile(argv[1], 1);
-    common::ByteBuffer bb = fh.readFile(64);
-    fh.closeFile();
-
-    ast::ASTHeader ast_header{bb};
+    ast::ASTHeader ast_header{fh.readFile(0x40)};
     ast_header.printContents();
 
     return 0;

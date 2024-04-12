@@ -17,11 +17,6 @@ ByteBuffer::ByteBuffer(ByteBuffer& copy)
     this->buffer = copy.buffer;
 }
 
-std::vector<char>& ByteBuffer::getBuffer()
-{
-    return this->buffer;
-}
-
 const std::string ByteBuffer::BytestoString(std::size_t start, std::size_t end)
 {
     std::string out;
