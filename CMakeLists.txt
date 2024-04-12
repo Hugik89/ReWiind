@@ -1,16 +1,16 @@
 cmake_minimum_required(VERSION 3.28.0)
 project(ReWiind VERSION 0.1.0 LANGUAGES CXX)
 
+set(AST2WAV ast2wav)
+
 include(CTest)
 enable_testing()
 
-add_subdirectory(src/ast)
-add_subdirectory(src/common)
+add_subdirectory(src)
 
-add_executable(${PROJECT_NAME} rewiind.cpp)
-
-target_link_libraries(${PROJECT_NAME} astEngine)
-target_link_libraries(${PROJECT_NAME} commonEngine)
+add_executable(${AST2WAV} src/ast/ast2wav.cpp)
+target_link_libraries(${AST2WAV} astlib)
+target_link_libraries(${AST2WAV} commonlib)
 
 set(CPACK_PROJECT_NAME ${PROJECT_NAME})
 set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})

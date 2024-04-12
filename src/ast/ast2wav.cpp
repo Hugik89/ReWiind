@@ -1,7 +1,7 @@
 #include <iostream>
 
-#include "src/ast/astheader.h"
-#include "src/common/filehandler.h"
+#include "astheader.h"
+#include "../common/filehandler.h"
 
 using namespace rewiind;
 

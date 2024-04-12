@@ -4,5 +4,5 @@ project(ReWiind VERSION 0.1.0 LANGUAGES CXX)
 include(CTest)
 enable_testing()
 
-set(SOURCES filehandler.cpp bytebuffer.cpp)
-add_library(commonlib SHARED ${SOURCES})
+add_subdirectory(ast)
+add_subdirectory(common)
