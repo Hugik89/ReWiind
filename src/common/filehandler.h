@@ -16,18 +16,18 @@ namespace common
 
 class FileHandler
 {
-private :
+private:
     std::fstream filestream;
-    bool openmode;
+    bool openmode_;
 
-public :
+public:
     FileHandler();
     FileHandler(std::string, bool mode);
 
     ~FileHandler();
 
     void openFile(std::string filename, bool mode);
-    rewiind::common::ByteBuffer readFile(std::size_t len);
+    ByteBuffer readFile(std::size_t len);
     void moveFileOffset(long offset, bool origin);
     void closeFile();
 };

@@ -7,10 +7,10 @@ FileHandler::FileHandler()
 
 }
 
-FileHandler::FileHandler(std::string filename, bool mode)
+FileHandler::FileHandler(std::string filename, bool mode):
+openmode_(mode)
 {
-    this->openmode = mode;
-    this->openFile(filename, this->openmode);
+    this->openFile(filename, this->openmode_);
 }
 
 FileHandler::~FileHandler()
@@ -24,7 +24,7 @@ void FileHandler::openFile(std::string filename, bool mode)
     if (this->filestream.is_open())
         return;
     
-    if (this->openmode)
+    if (this->openmode_)
         this->filestream.open(filename, (std::ios::in | std::ios::binary));
     else
         this->filestream.open(filename, (std::ios::out | std::ios::binary));
@@ -53,7 +53,7 @@ ByteBuffer FileHandler::readFile(std::size_t len)
 
 void FileHandler::moveFileOffset(long offset, bool origin)
 {
-    if (this->openmode)
+    if (this->openmode_)
         if (origin)
             this->filestream.seekg(offset, std::ios::beg);
         else

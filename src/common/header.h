@@ -8,7 +8,7 @@ namespace rewiind
 namespace common
 {
 
-class GenericHeader
+class GenericBuffer
 {
 protected:
     ByteBuffer bytes;
