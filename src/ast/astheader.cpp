@@ -2,15 +2,8 @@
 
 using namespace rewiind::ast;
 
-ASTHeader::ASTHeader(common::ByteBuffer& bytebuffer)
-{
-    this->bytes = std::move(bytebuffer);
-}
-
-ASTHeader::ASTHeader(common::ByteBuffer&& bytebuffer)
-{
-    this->bytes = std::move(bytebuffer);
-}
+ASTHeader::ASTHeader(const std::vector<char>& data): ByteBuffer(data) {}
+ASTHeader::ASTHeader(const std::vector<char>&& data): ByteBuffer(data) {}
 
 const std::string ASTHeader::parseAudioFormat()
 {

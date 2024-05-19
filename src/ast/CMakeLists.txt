@@ -4,5 +4,5 @@ project(ReWiind VERSION 0.1.0 LANGUAGES CXX)
 include(CTest)
 enable_testing()
 
-set(SOURCES astheader.cpp)
+set(SOURCES astheader.cpp astblock.cpp)
 add_library(astlib SHARED ${SOURCES})

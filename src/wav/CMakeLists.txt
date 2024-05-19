@@ -4,6 +4,5 @@ project(ReWiind VERSION 0.1.0 LANGUAGES CXX)
 include(CTest)
 enable_testing()
 
-add_subdirectory(ast)
-add_subdirectory(common)
-add_subdirectory(wav)
+set(SOURCES wavheader.cpp)
+add_library(wavlib SHARED ${SOURCES})

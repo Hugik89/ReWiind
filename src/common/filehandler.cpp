@@ -2,10 +2,7 @@
 
 using namespace rewiind::common;
 
-FileHandler::FileHandler()
-{
-
-}
+FileHandler::FileHandler() {}
 
 FileHandler::FileHandler(std::string filename, bool mode):
 openmode_(mode)
@@ -35,20 +32,16 @@ void FileHandler::openFile(std::string filename, bool mode)
     }
 }
 
-void FileHandler::closeFile()
-{
-    this->filestream.close();
-}
+void FileHandler::closeFile() { this->filestream.close(); }
 
-ByteBuffer FileHandler::readFile(std::size_t len)
+std::vector<char> FileHandler::readFile(std::size_t len)
 {
     std::vector<char> buffer;
     buffer.resize(len);
     
     this->filestream.read(buffer.data(), len);
 
-    ByteBuffer bytebuffer{buffer};
-    return bytebuffer;
+    return buffer;
 }
 
 void FileHandler::moveFileOffset(long offset, bool origin)

@@ -1,22 +1,14 @@
 #pragma once
 
-#include "bytebuffer.h"
-
 namespace rewiind
 {
-
-namespace common
-{
-
-class GenericBuffer
-{
-protected:
-    ByteBuffer bytes;
-
-public:
-    virtual void printContents() = 0;
-};
-
-}
-
+    namespace common
+    {
+        class GenericHeader
+        {
+            public:
+                virtual const std::string getMagic() = 0;
+                virtual void setMagic(std::string data) = 0;
+        };
+    }
 }

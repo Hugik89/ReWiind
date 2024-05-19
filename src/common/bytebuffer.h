@@ -9,31 +9,36 @@
 
 namespace rewiind
 {
+    namespace common
+    {
+        class ByteBuffer
+        {
+        private:
+            std::vector<unsigned char> getRawBytes(std::size_t offset, std::size_t size);
+            void setRawBytes(std::size_t offset, std::vector<unsigned char> data);
 
-namespace common
-{
+        protected:
+            std::vector<char> buffer;
 
-class ByteBuffer
-{
-private:
-    std::vector<char> buffer;
+        public:
+            // Must define base constructor
+            ByteBuffer();
 
-    std::vector<unsigned char> getRawBytes(std::size_t offset, std::size_t size);
+            ByteBuffer(const std::vector<char>& buf);
+            ByteBuffer(const std::vector<char>&& buf);
+            ByteBuffer(ByteBuffer& copy);
 
-public:
-    // Base constructor
-    ByteBuffer();
-    ByteBuffer(const std::vector<char>& buf);
+            const std::string readString(std::size_t start, std::size_t end);
+            const uint8_t readUint8(std::size_t offset);
+            const uint16_t readUint16(std::size_t offset);
+            const uint32_t readUint32(std::size_t offset);
 
-    // Copy constructor
-    ByteBuffer(ByteBuffer& copy);
+            void writeString(std::size_t offset, std::string data);
+            void writeUint8(std::size_t offset, uint8_t data);
+            void writeUint16(std::size_t offset, uint16_t data);
+            void writeUint32(std::size_t offset, uint32_t data);
 
-    const std::string BytestoString(std::size_t start, std::size_t end);
-    const uint8_t BytestoUint8(std::size_t offset);
-    const uint16_t BytestoUint16(std::size_t offset);
-    const uint32_t BytestoUint32(std::size_t offset);
-};
-
-}
-
+            virtual void printContents() = 0;
+        };
+    }
 }

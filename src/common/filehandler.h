@@ -10,28 +10,24 @@
 
 namespace rewiind
 {
+    namespace common
+    {
+        class FileHandler
+        {
+        private:
+            std::fstream filestream;
+            bool openmode_;
 
-namespace common
-{
+        public:
+            FileHandler();
+            FileHandler(std::string, bool mode);
 
-class FileHandler
-{
-private:
-    std::fstream filestream;
-    bool openmode_;
+            ~FileHandler();
 
-public:
-    FileHandler();
-    FileHandler(std::string, bool mode);
-
-    ~FileHandler();
-
-    void openFile(std::string filename, bool mode);
-    ByteBuffer readFile(std::size_t len);
-    void moveFileOffset(long offset, bool origin);
-    void closeFile();
-};
-
-}
-
+            void openFile(std::string filename, bool mode);
+            std::vector<char> readFile(std::size_t len);
+            void moveFileOffset(long offset, bool origin);
+            void closeFile();
+        };
+    }
 }
