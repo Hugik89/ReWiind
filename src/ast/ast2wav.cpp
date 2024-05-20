@@ -3,6 +3,7 @@
 #include "astheader.h"
 #include "astblock.h"
 #include "../common/filehandler.h"
+#include "../common/filename.h"
 
 using namespace rewiind;
 
