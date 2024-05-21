@@ -1,4 +1,5 @@
 build/
+scripts/
 test/
 .vscode/
 *.o
