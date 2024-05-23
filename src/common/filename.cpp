@@ -2,8 +2,9 @@
 
 using namespace rewiind::common;
 
-FilenameBuilder::FilenameBuilder(): std::string("out") {}
+FilenameBuilder::FilenameBuilder() {}
 FilenameBuilder::FilenameBuilder(const std::string& str): std::string(str) {}
+FilenameBuilder::FilenameBuilder(std::string&& str): std::string(str) {}
 
 void FilenameBuilder::addExtension(const std::string ext)
 {
@@ -23,4 +24,11 @@ void FilenameBuilder::createFilename(const std::string ext)
 {
     this->removeExtension();
     this->addExtension(ext);
+}
+
+void FilenameBuilder::setContents(const std::string str)
+{
+    if (!this->empty())
+        this->erase();
+    this->append(str);
 }

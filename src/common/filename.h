@@ -18,8 +18,11 @@ namespace rewiind
         public:
             FilenameBuilder();
             FilenameBuilder(const std::string& str);
+            FilenameBuilder(std::string&& str);
 
             void createFilename(const std::string ext);
+            
+            void setContents(const std::string str);
         };
     }
 }
