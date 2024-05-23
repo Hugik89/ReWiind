@@ -87,7 +87,7 @@ bool OptParser::parse()
     // If -r, must have an associated input file/directory
     if (this->getROptState())
     {
-        if (this->rpath_arg_ < 0)
+        if (this->getRPathArgPos() < 0)
         {
             this->parseerr_ = "Please define an input file";
             return false;
@@ -97,9 +97,19 @@ bool OptParser::parse()
     // If -c, must have an associated input file/directory
     if (this->getCOptState())
     {
-        if (this->cpath_arg_ < 0)
+        if (this->getCPathArgPos() < 0)
         {
             this->parseerr_ = "Please define an input file";
+            return false;
+        }
+    }
+
+    // If -r <path> -c <path>, the two arguments must be identical
+    if ((this->getROptState() &&  this->getCOptState()) && (this->getROptPos() != this->getCOptPos()))
+    {
+        if (this->getRPathArgValue() != this->getRPathArgValue())
+        {
+            this->parseerr_ = "Diverging paths for -r and -c: "+this->getRPathArgValue()+"!="+this->getCPathArgValue();
             return false;
         }
     }
@@ -132,43 +142,25 @@ bool OptParser::parseOption(const std::string opt, int argv_index, int opt_index
     return false;
 }
 
-inline
 int OptParser::getOptionPos(int index) { return this->optspos_[index]; }
-
-inline
 bool OptParser::getOptionState(int index) { return (this->optspos_[index] != -1) ? true : false; }
 
-inline
 const int OptParser::getRPathArgPos() { return this->rpath_arg_; }
-
-inline
 const int OptParser::getCPathArgPos() { return this->cpath_arg_; }
+const int OptParser::getOPathArgPos() { return this->out_arg_; }
 
-inline
-const int OptParser::getOutputArgPos() { return this->out_arg_; }
+const std::string OptParser::getRPathArgValue() { return this->argv_[this->getRPathArgPos()]; }
+const std::string OptParser::getCPathArgValue() { return this->argv_[this->getCPathArgPos()]; }
+const std::string OptParser::getOPathArgValue() { return this->argv_[this->getOPathArgPos()]; }
 
-inline
 const bool OptParser::getHOptState() { return this->getOptionState(0); }
-
-inline
 const bool OptParser::getROptState() { return this->getOptionState(1); }
-
-inline
 const bool OptParser::getCOptState() { return this->getOptionState(2); }
-
-inline
 const bool OptParser::getOOptState() { return this->getOptionState(3); }
 
-inline
 const int OptParser::getHOptPos() { return this->getOptionPos(0); }
-
-inline
 const int OptParser::getROptPos() { return this->getOptionPos(1); }
-
-inline
 const int OptParser::getCOptPos() { return this->getOptionPos(2); }
-
-inline
 const int OptParser::getOOptPos() { return this->getOptionPos(3); }
 
 void OptParser::printFlags()
@@ -180,7 +172,7 @@ void OptParser::printFlags()
 
     std::cout << "rpath : " << this->getRPathArgPos() << std::endl;
     std::cout << "cpath : " << this->getCPathArgPos() << std::endl;
-    std::cout << "out : " << this->getOutputArgPos() << std::endl;
+    std::cout << "out : " << this->getOPathArgPos() << std::endl;
 }
 
 void OptParser::printError() {  std::cerr << this->parseerr_ << std::endl; }

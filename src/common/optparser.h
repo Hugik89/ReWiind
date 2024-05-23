@@ -68,7 +68,11 @@ namespace rewiind
 
             const int getRPathArgPos();
             const int getCPathArgPos();
-            const int getOutputArgPos();
+            const int getOPathArgPos();
+
+            const std::string getRPathArgValue();
+            const std::string getCPathArgValue();
+            const std::string getOPathArgValue();
 
             void printFlags();
             void printError();
