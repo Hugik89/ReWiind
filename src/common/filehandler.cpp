@@ -44,6 +44,12 @@ std::vector<char> FileHandler::readFile(std::size_t len)
     return buffer;
 }
 
+inline
+void FileHandler::writeFile(std::vector<char> buffer)
+{
+    this->filestream.write(buffer.data(), buffer.size());
+}
+
 void FileHandler::moveFileOffset(long offset, bool origin)
 {
     if (this->openmode_)

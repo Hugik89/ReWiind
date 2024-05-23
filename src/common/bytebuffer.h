@@ -25,7 +25,7 @@ namespace rewiind
             ByteBuffer();
 
             ByteBuffer(const std::vector<char>& buf);
-            ByteBuffer(const std::vector<char>&& buf);
+            ByteBuffer(std::vector<char>&& buf);
             ByteBuffer(ByteBuffer& copy);
 
             const std::string readString(std::size_t start, std::size_t end);

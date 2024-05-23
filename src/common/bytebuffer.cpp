@@ -6,7 +6,7 @@ using namespace rewiind::common;
 
 ByteBuffer::ByteBuffer() {}
 ByteBuffer::ByteBuffer(const std::vector<char>& buf) { this->buffer = std::move(buf); }
-ByteBuffer::ByteBuffer(const std::vector<char>&& buf) { this->buffer = std::move(buf); }
+ByteBuffer::ByteBuffer(std::vector<char>&& buf) { this->buffer = std::move(buf); }
 ByteBuffer::ByteBuffer(ByteBuffer& copy) { this->buffer = copy.buffer; }
 
 const std::string ByteBuffer::readString(std::size_t start, std::size_t end)

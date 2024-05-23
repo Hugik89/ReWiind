@@ -3,7 +3,7 @@
 using namespace rewiind::ast;
 
 ASTHeader::ASTHeader(const std::vector<char>& data): ByteBuffer(data) {}
-ASTHeader::ASTHeader(const std::vector<char>&& data): ByteBuffer(data) {}
+ASTHeader::ASTHeader(std::vector<char>&& data): ByteBuffer(data) {}
 
 const std::string ASTHeader::parseAudioFormat()
 {

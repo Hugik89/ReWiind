@@ -25,9 +25,12 @@ namespace rewiind
             ~FileHandler();
 
             void openFile(std::string filename, bool mode);
-            std::vector<char> readFile(std::size_t len);
-            void moveFileOffset(long offset, bool origin);
             void closeFile();
+
+            std::vector<char> readFile(std::size_t len);
+            void writeFile(std::vector<char> data);
+
+            void moveFileOffset(long offset, bool origin);
         };
     }
 }

@@ -15,7 +15,7 @@ namespace rewiind
         {
         public:
             ASTHeader(const std::vector<char>& data);
-            ASTHeader(const std::vector<char>&& data);
+            ASTHeader(std::vector<char>&& data);
 
             inline const std::string getMagic() { return this->readString(0x00, 0x04); }
             inline const uint32_t getFileSize() { return this->readUint32(0x04); }
