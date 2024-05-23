@@ -75,6 +75,7 @@ namespace rewiind
             const std::string getOPathArgValue();
 
             void printFlags();
+            void printHelp();
             void printError();
         };
     }

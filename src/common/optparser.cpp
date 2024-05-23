@@ -175,4 +175,13 @@ void OptParser::printFlags()
     std::cout << "out : " << this->getOPathArgPos() << std::endl;
 }
 
+void OptParser::printHelp()
+{
+    std::cout << "Options :" << std::endl;
+    std::cout << "-h : print this section" << std::endl;
+    std::cout << "-r [file] : reads the given file" << std::endl;
+    std::cout << "-c [file] : converts the given file" << std::endl;
+    std::cout << "-o [file] : define output file, must be used with -c" << std::endl;
+}
+
 void OptParser::printError() {  std::cerr << this->parseerr_ << std::endl; }
