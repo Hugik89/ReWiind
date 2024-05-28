@@ -24,6 +24,7 @@ namespace rewiind
             // Must define base constructor
             ByteBuffer();
 
+            ByteBuffer(std::size_t buf_len);
             ByteBuffer(const std::vector<char>& buf);
             ByteBuffer(std::vector<char>&& buf);
             ByteBuffer(ByteBuffer& copy);
@@ -35,8 +36,13 @@ namespace rewiind
 
             void writeString(std::size_t offset, std::string data);
             void writeUint8(std::size_t offset, uint8_t data);
-            void writeUint16(std::size_t offset, uint16_t data);
-            void writeUint32(std::size_t offset, uint32_t data);
+
+            void writeUint16LE(std::size_t offset, uint16_t data);
+            void writeUint32LE(std::size_t offset, uint32_t data);
+            void writeUint16BE(std::size_t offset, uint16_t data);
+            void writeUint32BE(std::size_t offset, uint32_t data);
+
+            inline const std::vector<char> getData() { return this->buffer; }
 
             virtual void printContents() = 0;
         };
