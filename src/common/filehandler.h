@@ -28,7 +28,7 @@ namespace rewiind
             void closeFile();
 
             std::vector<char> readFile(std::size_t len);
-            void writeFile(std::vector<char> data);
+            inline void writeFile(std::vector<char> buffer) { this->filestream.write(buffer.data(), buffer.size()); }
 
             void moveFileOffset(long offset, bool origin);
         };

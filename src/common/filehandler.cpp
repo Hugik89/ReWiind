@@ -24,7 +24,7 @@ void FileHandler::openFile(std::string filename, bool mode)
     if (this->openmode_)
         this->filestream.open(filename, (std::ios::in | std::ios::binary));
     else
-        this->filestream.open(filename, (std::ios::out | std::ios::binary));
+        this->filestream.open(filename, (std::ios::out | std::ios::binary | std::ofstream::trunc));
 
     if (!this->filestream.is_open()) {
         std::cerr << "Cannot open file" << std::endl;
@@ -42,12 +42,6 @@ std::vector<char> FileHandler::readFile(std::size_t len)
     this->filestream.read(buffer.data(), len);
 
     return buffer;
-}
-
-inline
-void FileHandler::writeFile(std::vector<char> buffer)
-{
-    this->filestream.write(buffer.data(), buffer.size());
 }
 
 void FileHandler::moveFileOffset(long offset, bool origin)
