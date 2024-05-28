@@ -142,27 +142,6 @@ bool OptParser::parseOption(const std::string opt, int argv_index, int opt_index
     return false;
 }
 
-int OptParser::getOptionPos(int index) { return this->optspos_[index]; }
-bool OptParser::getOptionState(int index) { return (this->optspos_[index] != -1) ? true : false; }
-
-const int OptParser::getRPathArgPos() { return this->rpath_arg_; }
-const int OptParser::getCPathArgPos() { return this->cpath_arg_; }
-const int OptParser::getOPathArgPos() { return this->out_arg_; }
-
-const std::string OptParser::getRPathArgValue() { return this->argv_[this->getRPathArgPos()]; }
-const std::string OptParser::getCPathArgValue() { return this->argv_[this->getCPathArgPos()]; }
-const std::string OptParser::getOPathArgValue() { return this->argv_[this->getOPathArgPos()]; }
-
-const bool OptParser::getHOptState() { return this->getOptionState(0); }
-const bool OptParser::getROptState() { return this->getOptionState(1); }
-const bool OptParser::getCOptState() { return this->getOptionState(2); }
-const bool OptParser::getOOptState() { return this->getOptionState(3); }
-
-const int OptParser::getHOptPos() { return this->getOptionPos(0); }
-const int OptParser::getROptPos() { return this->getOptionPos(1); }
-const int OptParser::getCOptPos() { return this->getOptionPos(2); }
-const int OptParser::getOOptPos() { return this->getOptionPos(3); }
-
 void OptParser::printFlags()
 {
     std::cout << "-h : " << std::boolalpha << this->getHOptState() << ", pos : " << std::noboolalpha << this->getHOptPos() << std::endl;
@@ -183,5 +162,3 @@ void OptParser::printHelp()
     std::cout << "-c [file] : converts the given file" << std::endl;
     std::cout << "-o [file] : define output file, must be used with -c" << std::endl;
 }
-
-void OptParser::printError() {  std::cerr << this->parseerr_ << std::endl; }
