@@ -3,7 +3,10 @@
 using namespace rewiind::common;
 using namespace rewiind::wav;
 
-RIFFHeader::RIFFHeader(std::vector<char>& data): ByteBuffer(data) {}
+// ### RIFFHeader ### //
+
+RIFFHeader::RIFFHeader(std::size_t hdr_size): ByteBuffer(hdr_size) {}
+RIFFHeader::RIFFHeader(const std::vector<char>& data): ByteBuffer(data) {}
 RIFFHeader::RIFFHeader(std::vector<char>&& data): ByteBuffer(data) {}
 
 void RIFFHeader::printContents()
@@ -13,7 +16,10 @@ void RIFFHeader::printContents()
     std::cout << "Format magic : " << this->getFormat() << std::endl;
 }
 
-WAVHeader::WAVHeader(std::vector<char>& data): ByteBuffer(data) {}
+// ### WAVHeader ### //
+
+WAVHeader::WAVHeader(std::size_t hdr_size): ByteBuffer(hdr_size) {}
+WAVHeader::WAVHeader(const std::vector<char>& data): ByteBuffer(data) {}
 WAVHeader::WAVHeader(std::vector<char>&& data): ByteBuffer(data) {}
 
 const std::string WAVHeader::parseAudioFormat()
@@ -34,7 +40,10 @@ void WAVHeader::printContents()
     std::cout << "Bits per sample : " << this->getBitsSample() << std::endl;
 }
 
-WAVDataHdr::WAVDataHdr(std::vector<char>& data) : ByteBuffer(data) {}
+// ### WAVDataHdr ### //
+
+WAVDataHdr::WAVDataHdr(std::size_t hdr_size): ByteBuffer(hdr_size) {}
+WAVDataHdr::WAVDataHdr(const std::vector<char>& data) : ByteBuffer(data) {}
 WAVDataHdr::WAVDataHdr(std::vector<char>&& data) : ByteBuffer(data) {}
 
 void WAVDataHdr::printContents()
