@@ -31,15 +31,15 @@ namespace rewiind
             const std::string parseAudioFormat();
 
             inline void setMagic(std::string data) { this->writeString(0x00, data); }
-            inline void setFileSize(uint32_t data) { this->writeUint32(0x04, data); }
-            inline void setAudioFormat(uint16_t data) { this->writeUint16(0x08, data); }
-            inline void setBitDepth(uint16_t data) { this->writeUint16(0x0a, data); }
-            inline void setChannelCount(uint16_t data) { this->writeUint16(0x0c, data); }
-            inline void setSampleRate(uint32_t data) { this->writeUint32(0x10, data); }
-            inline void setSampleCount(uint32_t data) { this->writeUint32(0x14, data); }
-            inline void setLoopStart(uint32_t data) { this->writeUint32(0x18, data); }
-            inline void setLoopEnd(uint32_t data) { this->writeUint32(0x1c, data); }
-            inline void setFirstBlockSize(uint32_t data) { this->writeUint32(0x20, data); }
+            inline void setFileSize(uint32_t data) { this->writeUint32BE(0x04, data); }
+            inline void setAudioFormat(uint16_t data) { this->writeUint16BE(0x08, data); }
+            inline void setBitDepth(uint16_t data) { this->writeUint16BE(0x0a, data); }
+            inline void setChannelCount(uint16_t data) { this->writeUint16BE(0x0c, data); }
+            inline void setSampleRate(uint32_t data) { this->writeUint32BE(0x10, data); }
+            inline void setSampleCount(uint32_t data) { this->writeUint32BE(0x14, data); }
+            inline void setLoopStart(uint32_t data) { this->writeUint32BE(0x18, data); }
+            inline void setLoopEnd(uint32_t data) { this->writeUint32BE(0x1c, data); }
+            inline void setFirstBlockSize(uint32_t data) { this->writeUint32BE(0x20, data); }
 
             void printContents();
         };

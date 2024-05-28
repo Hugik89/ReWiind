@@ -21,7 +21,7 @@ namespace rewiind
             inline const uint32_t getBlockSize() { return this->readUint32(0x04); }
 
             inline void setMagic(std::string data) { this->writeString(0x00, data); }
-            inline void setBlockSize(uint32_t data) { this->writeUint32(0x04, data); }
+            inline void setBlockSize(uint32_t data) { this->writeUint32BE(0x04, data); }
 
             void printContents();
         };
