@@ -11,10 +11,11 @@ namespace rewiind
 {
     namespace ast
     {
-        class BLCKHeader : public common::ByteBuffer, common::GenericHeader
+        class BLCKHeader : public common::ByteBuffer, public common::GenericHeader
         {   
         public:
-            BLCKHeader(std::vector<char>& data);
+            BLCKHeader(std::size_t buf_len);
+            BLCKHeader(const std::vector<char>& data);
             BLCKHeader(std::vector<char>&& data);
 
             inline const std::string getMagic() { return this->readString(0x00, 0x04); }
@@ -33,11 +34,15 @@ namespace rewiind
             std::size_t offset = 0;
 
         public:
-            ASTBlock(uint16_t bit_depth, std::vector<char>& data);
+            ASTBlock(uint16_t bit_depth, std::size_t buf_len);
+            ASTBlock(uint16_t bit_depth, const std::vector<char>& data);
             ASTBlock(uint16_t bit_depth, std::vector<char>&& data);
+            ASTBlock(ASTBlock&& block);
 
             std::vector<unsigned char> getSampleData();
             void setSampleData(std::vector<unsigned char> data);
+
+            void printContents();
         };
     }
 }

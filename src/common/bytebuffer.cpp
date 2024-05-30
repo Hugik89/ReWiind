@@ -117,3 +117,9 @@ void ByteBuffer::setRawBytes(std::size_t offset, std::vector<unsigned char> data
     for (int i=0; i<data.size(); i++)
         this->buffer[offset+i] = data[i];
 }
+
+void ByteBuffer::setData(const std::vector<char> data)
+{
+    for (auto it: data)
+        this->buffer.push_back(it);
+}

@@ -43,6 +43,7 @@ namespace rewiind
             void writeUint32BE(std::size_t offset, uint32_t data);
 
             inline const std::vector<char> getData() { return this->buffer; }
+            void setData(const std::vector<char> data);
 
             virtual void printContents() = 0;
         };
