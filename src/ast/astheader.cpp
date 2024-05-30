@@ -2,8 +2,19 @@
 
 using namespace rewiind::ast;
 
-ASTHeader::ASTHeader(const std::vector<char>& data): ByteBuffer(data) {}
-ASTHeader::ASTHeader(std::vector<char>&& data): ByteBuffer(data) {}
+// ### ASTHeader ### //
+
+ASTHeader::ASTHeader(std::size_t buf_len): 
+ByteBuffer(buf_len) {}
+
+ASTHeader::ASTHeader(const std::vector<char>& data): 
+ByteBuffer(data) {}
+
+ASTHeader::ASTHeader(std::vector<char>&& data): 
+ByteBuffer(std::move(data)) {}
+
+ASTHeader::ASTHeader(ASTHeader&& temp): 
+ByteBuffer(std::move(temp)) {}
 
 const std::string ASTHeader::parseAudioFormat()
 {
@@ -34,4 +45,19 @@ void ASTHeader::printContents()
     std::cout << "Loop start (sample count) : " << this->getLoopStart() << std::endl;
     std::cout << "Loop end (sample count) : " << this->getLoopEnd() << std::endl;
     std::cout << "First block size : " << this->getFirstBlockSize() << " bytes" << std::endl;
+}
+
+// ### BLCKHeader ### //
+
+BLCKHeader::BLCKHeader(std::size_t buf_len): ByteBuffer(buf_len) {}
+
+BLCKHeader::BLCKHeader(const std::vector<char>& data): ByteBuffer(data) {}
+BLCKHeader::BLCKHeader(std::vector<char>&& data): ByteBuffer(data) {}
+
+BLCKHeader::BLCKHeader(BLCKHeader&& copy): ByteBuffer(std::move(copy)) {}
+
+void BLCKHeader::printContents()
+{
+    std::cout << "Block magic number : " << this->getMagic() << std::endl;
+    std::cout << "Block size (bytes) : " << this->getBlockSize() << std::endl;
 }

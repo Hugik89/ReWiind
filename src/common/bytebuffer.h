@@ -13,12 +13,11 @@ namespace rewiind
     {
         class ByteBuffer
         {
-        private:
-            std::vector<unsigned char> getRawBytes(std::size_t offset, std::size_t size);
-            void setRawBytes(std::size_t offset, std::vector<unsigned char> data);
-
         protected:
             std::vector<char> buffer;
+
+            std::vector<unsigned char> getRawBytes(std::size_t offset, std::size_t size);
+            void setRawBytes(std::size_t offset, std::vector<unsigned char> data);
 
         public:
             // Must define base constructor
@@ -28,6 +27,7 @@ namespace rewiind
             ByteBuffer(const std::vector<char>& buf);
             ByteBuffer(std::vector<char>&& buf);
             ByteBuffer(ByteBuffer& copy);
+            ByteBuffer(ByteBuffer&& temp);
 
             const std::string readString(std::size_t start, std::size_t end);
             const uint8_t readUint8(std::size_t offset);
@@ -43,7 +43,7 @@ namespace rewiind
             void writeUint32BE(std::size_t offset, uint32_t data);
 
             inline const std::vector<char> getData() { return this->buffer; }
-            void setData(const std::vector<char> data);
+            inline void setData(const std::vector<char> data) { for (auto it: data) this->buffer.push_back(it); }
 
             virtual void printContents() = 0;
         };

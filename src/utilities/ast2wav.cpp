@@ -1,10 +1,9 @@
 #include "../common/filehandler.h"
 #include "../common/filename.h"
 #include "../common/optparser.h"
+#include "../common/sampleblock.h"
 #include "../ast/astheader.h"
-#include "../ast/astblock.h"
 #include "../wav/wavheader.h"
-#include "../wav/wavblock.h"
 
 using namespace rewiind;
 
@@ -91,7 +90,7 @@ int main(int argc, char* argv[])
         wav::WAVHeader wav_header{0x18};                            // PCM only !
         wav::WAVDataHdr wav_data_hdr{0x08};
 
-        // ### Set headers contents ### //
+        // ### Set header contents ### //
 
         uint16_t channel_count = ast_header.getChannelCount();
         uint32_t sample_rate = ast_header.getSampleRate();
@@ -125,52 +124,40 @@ int main(int argc, char* argv[])
         // ### Write WAV data ### //
 
         std::size_t input_offset = 0x40;
-        uint32_t ast_size = ast_header.getFileSize();
+        uint32_t ast_filesize = ast_header.getFileSize();
 
-        std::size_t wav_offset = 0x0;
-        std::vector<std::size_t> ast_offsets;
-        ast_offsets.resize(channel_count);
-        
-        std::vector<ast::ASTBlock> data_blocks;
+        std::vector<common::SampleBlock> ast_blocks;
 
-        uint32_t block_size;
-
-        while (input_offset < ast_size+0x40)
+        while (input_offset < ast_filesize+0x40)
         {  
             ast::BLCKHeader blck_header{input.readFile(0x20)};
-            block_size = blck_header.getBlockSize();
-            
-            wav_offset = 0x0;
+            uint32_t block_size = blck_header.getBlockSize();
 
-            // Read AST blocks //
-            for (int i=0; i<channel_count; i++)
+            for (uint16_t i=0; i<channel_count; i++)
+                ast_blocks.push_back(common::SampleBlock{bit_depth, input.readFile(block_size)});
+
+            common::SampleBlock wav_data{bit_depth, static_cast<std::size_t>(block_size*channel_count)};
+
+            // Read AST samples and write them to WAV file //
+            while (wav_data.getOffset() < block_size*channel_count)
             {
-                data_blocks.push_back(ast::ASTBlock{bit_depth, input.readFile(block_size)});
-                ast_offsets[i] = 0x0;
-            }
+                for (uint16_t i=0; i<channel_count; i++) {
+                    wav_data.setSampleDataBE(ast_blocks[i].getSampleData());
 
-            wav::WAVBlock wav_data{static_cast<std::size_t>(block_size*channel_count)};
-
-            while (wav_offset < block_size*channel_count)
-            {
-                // Get AST samples and write them to WAV file //
-                for (int i=0; i<channel_count; i++)
-                {
-                    // Use getSampleData instead of readUint16BE
-                    wav_data.writeUint16LE(wav_offset, data_blocks[i].readUint16(ast_offsets[i]));
-
-                    ast_offsets[i] += bit_depth/8;
-                    wav_offset += bit_depth/8;
+                    ast_blocks[i].moveBlockOffset(bit_depth/8, true);
+                    wav_data.moveBlockOffset(bit_depth/8, true);
                 }
             }
 
-            output.writeFile(wav_data.getData());
-                
+            output.writeFile(wav_data.getBlock());
+
+            for (int i=0;i<channel_count; i++)
+                ast_blocks[i].clearBlock();
+            ast_blocks.clear();
+            wav_data.clearBlock();
+
             input_offset += 0x20+(block_size*channel_count);
             input.moveFileOffset(input_offset, true);
-
-            data_blocks.clear();
-            wav_data.clearData();
         }
     }
 

@@ -6,9 +6,10 @@ using namespace rewiind::common;
 
 ByteBuffer::ByteBuffer() {}
 ByteBuffer::ByteBuffer(std::size_t buf_len) { this->buffer.resize(buf_len, 0); }
-ByteBuffer::ByteBuffer(const std::vector<char>& buf) { this->buffer = std::move(buf); }
+ByteBuffer::ByteBuffer(const std::vector<char>& buf) { this->buffer = buf; }
 ByteBuffer::ByteBuffer(std::vector<char>&& buf) { this->buffer = std::move(buf); }
 ByteBuffer::ByteBuffer(ByteBuffer& copy) { this->buffer = copy.buffer; }
+ByteBuffer::ByteBuffer(ByteBuffer&& temp) { std::move(temp); }
 
 const std::string ByteBuffer::readString(std::size_t start, std::size_t end)
 {
@@ -116,10 +117,4 @@ void ByteBuffer::setRawBytes(std::size_t offset, std::vector<unsigned char> data
 {
     for (int i=0; i<data.size(); i++)
         this->buffer[offset+i] = data[i];
-}
-
-void ByteBuffer::setData(const std::vector<char> data)
-{
-    for (auto it: data)
-        this->buffer.push_back(it);
 }

@@ -4,5 +4,5 @@ project(ReWiind VERSION 0.1.0 LANGUAGES CXX)
 include(CTest)
 enable_testing()
 
-set(SOURCES wavheader.cpp wavblock.cpp)
+set(SOURCES wavheader.cpp)
 add_library(wavlib SHARED ${SOURCES})

@@ -14,8 +14,10 @@ namespace rewiind
         class ASTHeader : public common::ByteBuffer, common::GenericHeader
         {
         public:
+            ASTHeader(std::size_t buf_len);
             ASTHeader(const std::vector<char>& data);
             ASTHeader(std::vector<char>&& data);
+            ASTHeader(ASTHeader&& temp);
 
             inline const std::string getMagic() { return this->readString(0x00, 0x04); }
             inline const uint32_t getFileSize() { return this->readUint32(0x04); }
@@ -40,6 +42,23 @@ namespace rewiind
             inline void setLoopStart(uint32_t data) { this->writeUint32BE(0x18, data); }
             inline void setLoopEnd(uint32_t data) { this->writeUint32BE(0x1c, data); }
             inline void setFirstBlockSize(uint32_t data) { this->writeUint32BE(0x20, data); }
+
+            void printContents();
+        };
+
+        class BLCKHeader : public common::ByteBuffer, public common::GenericHeader
+        {   
+        public:
+            BLCKHeader(std::size_t buf_len);
+            BLCKHeader(const std::vector<char>& data);
+            BLCKHeader(std::vector<char>&& data);
+            BLCKHeader(BLCKHeader&& copy);
+
+            inline const std::string getMagic() { return this->readString(0x00, 0x04); }
+            inline const uint32_t getBlockSize() { return this->readUint32(0x04); }
+
+            inline void setMagic(std::string data) { this->writeString(0x00, data); }
+            inline void setBlockSize(uint32_t data) { this->writeUint32BE(0x04, data); }
 
             void printContents();
         };
