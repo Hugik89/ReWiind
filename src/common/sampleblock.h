@@ -27,15 +27,15 @@ namespace rewiind
 
             void moveBlockOffset(std::size_t off, bool where);
 
-            inline std::size_t getOffset() { return this->offset_; }
-            inline void setOffset(std::size_t off) { this->offset_ = off; }
+            inline const std::size_t getOffset() { return this->offset_; }
+            inline void setOffset(const std::size_t off) { this->offset_ = off; }
             inline void clearOffset() { this->offset_ = 0x0; }
 
-            std::vector<char> getSampleData();
-            void setSampleDataLE(std::vector<char> data);
-            void setSampleDataBE(std::vector<char> data);
+            const std::vector<char> getSampleData();
+            void setSampleDataLE(const std::vector<char> data);
+            void setSampleDataBE(const std::vector<char> data);
 
-            inline std::vector<char> getBlock() { return this->data_; }
+            inline const std::vector<char> getBlock() { return this->data_; }
             inline void clearBlock() { this->data_.clear(); }
         };
     }

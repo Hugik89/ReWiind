@@ -22,7 +22,7 @@ void SampleBlock::moveBlockOffset(std::size_t off, bool where)
     else        this->offset_ -= off;
 }
 
-std::vector<char> SampleBlock::getSampleData()
+const std::vector<char> SampleBlock::getSampleData()
 {
     std::vector<char> sample;
 
@@ -32,13 +32,13 @@ std::vector<char> SampleBlock::getSampleData()
     return sample;
 }
 
-void SampleBlock::setSampleDataLE(std::vector<char> data)
+void SampleBlock::setSampleDataLE(const std::vector<char> data)
 {
     for (std::size_t i=0; i<this->bytes_per_sample_; i++)
         this->data_[this->offset_+i] = data[i];
 }
 
-void SampleBlock::setSampleDataBE(std::vector<char> data)
+void SampleBlock::setSampleDataBE(const std::vector<char> data)
 {
     for (std::size_t i=0; i<this->bytes_per_sample_; i++)
         this->data_[this->offset_+i] = data[data.size()-i-1];
