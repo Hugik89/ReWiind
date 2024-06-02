@@ -9,6 +9,8 @@ namespace rewiind
             public:
                 virtual const std::string getMagic() = 0;
                 virtual void setMagic(std::string data) = 0;
+
+                virtual void printContents() = 0;
         };
     }
 }
