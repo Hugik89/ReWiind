@@ -4,12 +4,20 @@ using namespace rewiind::common;
 
 // ### ByteBuffer ### //
 
-ByteBuffer::ByteBuffer() {}
-ByteBuffer::ByteBuffer(std::size_t buf_len) { this->buffer.resize(buf_len, 0); }
-ByteBuffer::ByteBuffer(const std::vector<char>& buf) { this->buffer = buf; }
-ByteBuffer::ByteBuffer(std::vector<char>&& buf) { this->buffer = std::move(buf); }
-ByteBuffer::ByteBuffer(ByteBuffer& copy) { this->buffer = copy.buffer; }
-ByteBuffer::ByteBuffer(ByteBuffer&& temp) { std::move(temp); }
+ByteBuffer::ByteBuffer(std::size_t buf_len) 
+{ this->buffer.resize(buf_len, 0); }
+
+ByteBuffer::ByteBuffer(const std::vector<char>& buf):
+buffer(buf) {}
+
+ByteBuffer::ByteBuffer(std::vector<char>&& buf):
+buffer(std::move(buf)) {}
+
+ByteBuffer::ByteBuffer(ByteBuffer& copy): 
+buffer(copy.buffer) {}
+
+ByteBuffer::ByteBuffer(ByteBuffer&& temp):
+buffer(std::move(temp.buffer)) {}
 
 const std::string ByteBuffer::readString(std::size_t start, std::size_t end)
 {
@@ -80,23 +88,23 @@ void ByteBuffer::writeUint16LE(std::size_t offset, uint16_t data)
     this->setRawBytes(offset, raw);
 }
 
-void ByteBuffer::writeUint32LE(std::size_t offset, uint32_t data)
-{
-    std::vector<unsigned char> raw;
-    raw.reserve(4);
-
-    for (int i=0; i<4; i++)
-        raw.push_back(static_cast<unsigned char>((data >> (8*i))));
-    
-    this->setRawBytes(offset, raw);
-}
-
 void ByteBuffer::writeUint16BE(std::size_t offset, uint16_t data)
 {
     std::vector<unsigned char> raw;
     raw.reserve(2);
 
     for (int i=1; i>=0; i--)
+        raw.push_back(static_cast<unsigned char>((data >> (8*i))));
+    
+    this->setRawBytes(offset, raw);
+}
+
+void ByteBuffer::writeUint32LE(std::size_t offset, uint32_t data)
+{
+    std::vector<unsigned char> raw;
+    raw.reserve(4);
+
+    for (int i=0; i<4; i++)
         raw.push_back(static_cast<unsigned char>((data >> (8*i))));
     
     this->setRawBytes(offset, raw);

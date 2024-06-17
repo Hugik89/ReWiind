@@ -49,12 +49,17 @@ void ASTHeader::printContents()
 
 // ### BLCKHeader ### //
 
-BLCKHeader::BLCKHeader(std::size_t buf_len): ByteBuffer(buf_len) {}
+BLCKHeader::BLCKHeader(std::size_t buf_len):
+ByteBuffer(buf_len) {}
 
-BLCKHeader::BLCKHeader(const std::vector<char>& data): ByteBuffer(data) {}
-BLCKHeader::BLCKHeader(std::vector<char>&& data): ByteBuffer(data) {}
+BLCKHeader::BLCKHeader(const std::vector<char>& data):
+ByteBuffer(data) {}
 
-BLCKHeader::BLCKHeader(BLCKHeader&& copy): ByteBuffer(std::move(copy)) {}
+BLCKHeader::BLCKHeader(std::vector<char>&& data):
+ByteBuffer(std::move(data)) {}
+
+BLCKHeader::BLCKHeader(BLCKHeader&& temp):
+ByteBuffer(std::move(temp)) {}
 
 void BLCKHeader::printContents()
 {
