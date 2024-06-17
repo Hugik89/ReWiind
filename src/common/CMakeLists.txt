@@ -1,8 +1,15 @@
-cmake_minimum_required(VERSION 3.28.0)
-project(ReWiind VERSION 0.1.0 LANGUAGES CXX)
+target_sources(commonlib
+    PUBLIC
+        bytebuffer.cpp
+        bytebuffer.h
+        filehandler.cpp
+        filehandler.h
+        filename.cpp
+        filename.h
+        sampleblock.cpp
+        sampleblock.h
+        optparser.cpp
+        optparser.h
+)
 
-include(CTest)
-enable_testing()
-
-set(SOURCES bytebuffer.cpp filehandler.cpp filename.cpp sampleblock.cpp optparser.cpp)
-add_library(commonlib SHARED ${SOURCES})
+target_include_directories(commonlib PUBLIC ${CMAKE_CURRENT_LIST_DIR})
