@@ -3,8 +3,6 @@
 #include <string>
 #include <memory>
 
-#include <iostream>
-
 namespace rewiind
 {
     namespace common

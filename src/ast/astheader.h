@@ -2,7 +2,6 @@
 
 #include <memory>
 #include <string>
-#include <iterator>
 
 #include "../common/header.h"
 #include "../common/bytebuffer.h"

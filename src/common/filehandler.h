@@ -6,8 +6,6 @@
 #include <fstream>
 #include <sstream>
 
-#include "bytebuffer.h"
-
 namespace rewiind
 {
     namespace common

@@ -5,8 +5,6 @@
 #include <string>
 #include <iterator>
 
-#include <iostream>
-
 namespace rewiind
 {
     namespace common
