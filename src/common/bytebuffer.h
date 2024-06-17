@@ -4,6 +4,7 @@
 #include <vector>
 #include <memory>
 #include <algorithm>
+#include "endian.h"
 
 #include <iostream>
 
@@ -55,7 +56,7 @@ namespace rewiind
              * @param offset Position of the data inside the buffer
              * @return `const uint8_t` 
              */
-            inline const uint8_t readUint8(std::size_t offset) { return static_cast<uint8_t>(this->buffer[offset]); }
+            inline const uint8_t readUint8(std::size_t offset);
 
             /**
              * @brief Retrieve data from the buffer as an unsigned short
@@ -125,7 +126,18 @@ namespace rewiind
              */
             void writeUint32BE(std::size_t offset, uint32_t data);
 
+            /**
+             * @brief Get the entire buffer contents
+             * 
+             * @return `const std::vector<char>`
+             */
             inline const std::vector<char> getData() { return this->buffer; }
+
+            /**
+             * @brief Set the entire buffer contents
+             * 
+             * @param data The data to write to the buffer
+             */
             inline void setData(const std::vector<char> data) { for (auto it: data) this->buffer.push_back(it); }
         };
     }
