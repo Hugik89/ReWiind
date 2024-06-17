@@ -9,8 +9,8 @@ enable_testing()
 add_subdirectory(src)
 
 add_executable(${AST2WAV} src/utilities/${AST2WAV}.cpp)
-target_link_libraries(${AST2WAV} astlib)
 target_link_libraries(${AST2WAV} commonlib)
+target_link_libraries(${AST2WAV} astlib)
 target_link_libraries(${AST2WAV} wavlib)
 
 set(CPACK_PROJECT_NAME ${PROJECT_NAME})
