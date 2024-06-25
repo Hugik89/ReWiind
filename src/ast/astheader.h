@@ -123,63 +123,63 @@ namespace rewiind
              * 
              * @param data Value for file size
              */
-            inline void setFileSize(uint32_t data) { this->writeUint32BE(0x04, data); }
+            inline void setFileSize(uint32_t data) { this->writeUint32Reverse(0x04, data); }
 
             /**
              * @brief Set the <em>audio format</em> field of a .ast file header
              * 
              * @param data Value for audio format
              */
-            inline void setAudioFormat(uint16_t data) { this->writeUint16BE(0x08, data); }
+            inline void setAudioFormat(uint16_t data) { this->writeUint16Reverse(0x08, data); }
 
             /**
              * @brief Set the <em>bit depth</em> field of a .ast file header
              * 
              * @param data Value for bit depth
              */
-            inline void setBitDepth(uint16_t data) { this->writeUint16BE(0x0a, data); }
+            inline void setBitDepth(uint16_t data) { this->writeUint16Reverse(0x0a, data); }
 
             /**
              * @brief Set the <em>number of channels</em> field of a .ast file header
              * 
              * @param data Value for number of channels
              */
-            inline void setChannelCount(uint16_t data) { this->writeUint16BE(0x0c, data); }
+            inline void setChannelCount(uint16_t data) { this->writeUint16Reverse(0x0c, data); }
 
             /**
              * @brief Set the <em>sample rate</em> field of a .ast file header
              * 
              * @param data Value for sample rate
              */
-            inline void setSampleRate(uint32_t data) { this->writeUint32BE(0x10, data); }
+            inline void setSampleRate(uint32_t data) { this->writeUint32Reverse(0x10, data); }
 
             /**
              * @brief Set the <em>sample count</em> field of a .ast file header
              * 
              * @param data Value for sample count
              */
-            inline void setSampleCount(uint32_t data) { this->writeUint32BE(0x14, data); }
+            inline void setSampleCount(uint32_t data) { this->writeUint32Reverse(0x14, data); }
 
             /**
              * @brief Set the <em>loop start</em> field of a .ast file header
              * 
              * @param data Value for loop start
              */
-            inline void setLoopStart(uint32_t data) { this->writeUint32BE(0x18, data); }
+            inline void setLoopStart(uint32_t data) { this->writeUint32Reverse(0x18, data); }
 
             /**
              * @brief Set the <em>loop end</em> field of a .ast file header
              * 
              * @param data Value for loop end
              */
-            inline void setLoopEnd(uint32_t data) { this->writeUint32BE(0x1c, data); }
+            inline void setLoopEnd(uint32_t data) { this->writeUint32Reverse(0x1c, data); }
 
             /**
              * @brief Set the <em>first block size</em> field of a .ast file header
              * 
              * @param data Value for first block size
              */
-            inline void setFirstBlockSize(uint32_t data) { this->writeUint32BE(0x20, data); }
+            inline void setFirstBlockSize(uint32_t data) { this->writeUint32Reverse(0x20, data); }
 
             /**
              * @brief Returns a string describing the type of audio format 
@@ -252,7 +252,7 @@ namespace rewiind
              * 
              * @param data Value for block size
              */
-            inline void setBlockSize(uint32_t data) { this->writeUint32BE(0x04, data); }
+            inline void setBlockSize(uint32_t data) { this->writeUint32Reverse(0x04, data); }
 
             /**
              * @brief Prints the fields of a .ast block header and their associated values

@@ -21,7 +21,7 @@ namespace rewiind
             inline const std::string getFormat() { return this->readString(0x04, 0x08); }
 
             inline void setMagic(std::string data) { this->writeString(0x00, data); }
-            inline void setChunkSize(uint32_t data) { this->writeUint32LE(0x04, data); }
+            inline void setChunkSize(uint32_t data) { this->writeUint32(0x04, data); }
             inline void setFormat(std::string data) { this->writeString(0x08, data); }
 
             void printContents();
@@ -46,13 +46,13 @@ namespace rewiind
             const std::string parseAudioFormat();
 
             inline void setMagic(std::string data) { this->writeString(0x00, data); }
-            inline void setChunkSize(uint32_t data) { this->writeUint32LE(0x04, data); }
-            inline void setAudioFormat(uint16_t data) { this->writeUint16LE(0x08, data); }
-            inline void setChannelCount(uint16_t data) { this->writeUint16LE(0x0a, data); }
-            inline void setSampleRate(uint32_t data) { this->writeUint32LE(0x0c, data); }
-            inline void setByteRate(uint32_t data) { this->writeUint32LE(0x10, data); }
-            inline void setBlockAlign(uint16_t data) { this->writeUint16LE(0x14, data); }
-            inline void setBitsSample(uint16_t data) { this->writeUint16LE(0x16, data); }
+            inline void setChunkSize(uint32_t data) { this->writeUint32(0x04, data); }
+            inline void setAudioFormat(uint16_t data) { this->writeUint16(0x08, data); }
+            inline void setChannelCount(uint16_t data) { this->writeUint16(0x0a, data); }
+            inline void setSampleRate(uint32_t data) { this->writeUint32(0x0c, data); }
+            inline void setByteRate(uint32_t data) { this->writeUint32(0x10, data); }
+            inline void setBlockAlign(uint16_t data) { this->writeUint16(0x14, data); }
+            inline void setBitsSample(uint16_t data) { this->writeUint16(0x16, data); }
 
             void printContents();
         };
@@ -68,7 +68,7 @@ namespace rewiind
             inline const uint32_t getDataSize() { return this->readUint32(0x04); }
             
             inline void setMagic(std::string data) { this->writeString(0x00, data); }
-            inline void setDataSize(uint32_t data) { this->writeUint32LE(0x04, data); }
+            inline void setDataSize(uint32_t data) { this->writeUint32(0x04, data); }
 
             void printContents();
         };

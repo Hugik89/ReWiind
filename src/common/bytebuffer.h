@@ -95,7 +95,7 @@ namespace rewiind
              * @param offset Starting position inside the buffer
              * @param data The unsigned short value to write to the buffer
              */
-            void writeUint16LE(std::size_t offset, uint16_t data);
+            void writeUint16(std::size_t offset, uint16_t data);
 
             /**
              * @brief Write unsigned short value to the buffer,
@@ -104,25 +104,25 @@ namespace rewiind
              * @param offset Starting position inside the buffer
              * @param data The unsigned short value to write to the buffer
              */
-            void writeUint16BE(std::size_t offset, uint16_t data);
+            void writeUint16Reverse(std::size_t offset, uint16_t data);
 
             /**
-             * @brief Write unsigned int value to the buffer,
-             * with little-endian sorting
+             * @brief Write unsigned int value to the buffer.
+             * The bytes are written in the order they are stored in the buffer.
              * 
              * @param offset Starting position inside the buffer
              * @param data The unsigned int value to write to the buffer
              */
-            void writeUint32LE(std::size_t offset, uint32_t data);
+            void writeUint32(std::size_t offset, uint32_t data);
 
             /**
-             * @brief Write unsigned int value to the buffer,
-             * with big-endian sorting
+             * @brief Write unsigned int value to the buffer.
+             * The bytes are written in the reverse order they are stored in the buffer.
              * 
              * @param offset Starting position inside the buffer
              * @param data The unsigned int value to write to the buffer
              */
-            void writeUint32BE(std::size_t offset, uint32_t data);
+            void writeUint32Reverse(std::size_t offset, uint32_t data);
 
             /**
              * @brief Get the entire buffer contents

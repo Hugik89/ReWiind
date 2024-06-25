@@ -77,7 +77,7 @@ void ByteBuffer::writeUint8(std::size_t offset, uint8_t data)
     this->setRawBytes(offset, raw);
 }
 
-void ByteBuffer::writeUint16LE(std::size_t offset, uint16_t data)
+void ByteBuffer::writeUint16(std::size_t offset, uint16_t data)
 {
     std::vector<unsigned char> raw;
     raw.reserve(2);
@@ -88,7 +88,7 @@ void ByteBuffer::writeUint16LE(std::size_t offset, uint16_t data)
     this->setRawBytes(offset, raw);
 }
 
-void ByteBuffer::writeUint16BE(std::size_t offset, uint16_t data)
+void ByteBuffer::writeUint16Reverse(std::size_t offset, uint16_t data)
 {
     std::vector<unsigned char> raw;
     raw.reserve(2);
@@ -99,7 +99,7 @@ void ByteBuffer::writeUint16BE(std::size_t offset, uint16_t data)
     this->setRawBytes(offset, raw);
 }
 
-void ByteBuffer::writeUint32LE(std::size_t offset, uint32_t data)
+void ByteBuffer::writeUint32(std::size_t offset, uint32_t data)
 {
     std::vector<unsigned char> raw;
     raw.reserve(4);
@@ -110,7 +110,7 @@ void ByteBuffer::writeUint32LE(std::size_t offset, uint32_t data)
     this->setRawBytes(offset, raw);
 }
 
-void ByteBuffer::writeUint32BE(std::size_t offset, uint32_t data)
+void ByteBuffer::writeUint32Reverse(std::size_t offset, uint32_t data)
 {
     std::vector<unsigned char> raw;
     raw.reserve(4);
