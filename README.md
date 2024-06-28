@@ -1,6 +1,6 @@
 # ReWiind
 
-A set of tools for conversion of various Wii files, written in C++.  
+A set of converting tools for various Wii files, written in C++.  
 This is currently a work in progress !  
 
 ## Available converters
@@ -15,7 +15,7 @@ This project builds the following converters :
 First, ensure that you have [cmake 3.28+](https://cmake.org/) installed.  
 Then, follow the instructions depending on your operating system : 
 
-### For Linux :
+#### Linux :
 
 ```
 mkdir build
@@ -24,16 +24,23 @@ cmake -S ../ -B ./
 cmake --build ./
 ```
 
-### For Windows :
+#### Windows :
 
-Mostly the same as Linux instructions, must check
+```
+cmake -S . -B build
+cmake --build build
+```
 
 ## How to run converters
 
 Open a shell, then :
 
-- on Linux, run ``` ./<converter_name> -h ```
-- on Windows, run ```<converter_name> -h``` (probably)
+- on Linux, run ``` ./build/<converter_name> -h ```
+- on Windows, run :  
+```
+cd build/Debug
+<converter_name> -h
+```
 
 ## Upcoming converters
 
